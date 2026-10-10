@@ -6,6 +6,9 @@
 ## Demo Video
 https://youtu.be/W5NdRDSqj0U
 
+*The video shows the main-run configuration (85.4% NSC). A later, nested-validated change to how
+replicate wells are aggregated reaches 93.2%; see "Post-hoc improvement" below.*
+
 ## Code Repository Link
 https://github.com/shreshth006/shennongs-glass (MIT licence; Kaggle feature-extraction notebooks are public and linked from the README)
 
@@ -109,10 +112,19 @@ treatment profile on the mean of all non-DMSO treatments before cosine similarit
 | Mean + centring, every TVN size (64/128/256) and classical weight (0.4/0.7/1.0) | 89.3%–94.2% | 80.4%–87.0% |
 | **Nested selection** (setting chosen without the held-out compound) | **93.2%** | **84.8%** |
 
+The reliability guarantees hold and get better with the same change (main-run TVN and weights):
+
+| | Main run | Mean + centring |
+|---|---|---|
+| 90% conformal sets | 91.3% coverage, 1.18 MoAs per set | 94.2% coverage, 1.00 per set |
+| 95% conformal sets | 96.1% coverage, 1.73 per set | 95.1% coverage, 1.44 per set |
+| Novel-MoA detection | AUROC 0.79 | AUROC 0.83 |
+
 The nested figure is the honest estimate: it puts the training-free system inside the published
-90–96% range, still with no training and on a CPU-only, reduced feature set. The demo video, app and
-PDF report use the main-run configuration; the conformal and dose analyses have not yet been re-run
-with this setting.
+90–96% range, still with no training and on a CPU-only, reduced feature set. A wider search of 144
+settings (standardisation, PCA whitening, trimmed means, per-view processing) found nothing better;
+nested over that larger space the estimate is 91.3% / 81.5%, so we report the smaller, principled
+change. The demo video, app, PDF report and dose analysis use the main-run configuration.
 
 ![Phenotypic atlas of all 906 compound-dose treatments; annotated mechanisms form clusters the model was never told about](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_umap.png)
 
