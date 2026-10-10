@@ -1,84 +1,98 @@
-# Demo video script: Shennong's Glass (target 4:30, hard limit 5:00)
+# Demo video script: Shennong's Glass (target about 4:30, hard limit 5:00)
 
-**Setup**
-- Start the app with `.venv/bin/python app/app.py` and open http://127.0.0.1:7860. Zoom the browser
-  to about 110%.
-- Record the screen at 1080p, either with Fedora's recorder (Ctrl+Shift+Alt+R) or OBS. Speak
-  calmly and leave a short pause between sections, which you can trim later.
-- **Keep on screen the whole time** (a corner caption, or the app header): *"Images: BBBC021v1,
-  Caie et al. 2010, Broad Bioimage Benchmark Collection"*. Use no music, or royalty-free only.
-- Before recording, run each example once so the model is loaded and nothing stalls on camera.
+Say it the way you'd explain it to a friend in the lab. You don't need to read it word for word;
+if a sentence doesn't sound like you, change it. Each block is one voice file, named as in the
+heading (e.g. `01_hook`).
+
+**Numbers to quote** come from `results/metrics.json`. Re-check them if the analysis is re-run.
 
 ---
 
-### 0:00–0:25 Hook (app header with the Shennong quote)
-> "In Chinese legend, Shennong tasted hundreds of herbs to tell medicine from poison. His body
-> was transparent, so he could watch each herb act on his organs. An organ-on-a-chip is that
-> transparent body. **Shennong's Glass** is the AI that watches it."
+### 01_hook (about 25 s)
+> There's an old Chinese legend about Shennong, the Divine Farmer. He tasted hundreds of plants to
+> work out which ones heal and which ones kill. And the story goes that his body was transparent,
+> so he could actually watch each herb working inside him.
+>
+> We kind of have that now. It's called an organ-on-a-chip: living human tissue you can look
+> straight through. What's missing is someone to watch it. So I built Shennong's Glass.
 
-### 0:25–0:55 The problem (README table, or talk over the app)
-> "Organ-on-chip assays end with fluorescence images: nuclei, tubulin, actin. A scientist needs
-> four answers. Is the compound doing anything? Is it just killing cells? How does it act? And
-> can I trust that answer? Today that means manual analysis and models that never say 'I don't
-> know'."
+### 02_problem (about 30 s)
+> At the end of most of these experiments you get a stack of microscope images: nuclei, tubulin,
+> actin. And from those, a scientist wants to know four things. Is the drug doing anything? Is it
+> just killing the cells? How is it working? And how sure can I be?
+>
+> Right now that's a lot of manual work, and the AI tools that do exist will always hand you an
+> answer, even when they really shouldn't.
 
-### 0:55–1:25 The idea (pipeline figure, report Figure 1)
-> "Shennong's Glass needs **no training**. A frozen foundation model, DINOv2, describes every cell
-> and every field, channel by channel. Classical segmentation adds measurements a biologist can
-> read. Everything is calibrated against the untreated wells on the same plate. A mechanism comes
-> from the most similar compounds in a reference library, so moving to a new chip means a new
-> library, not new training. And everything you'll see runs on **real images, not simulations**."
+### 03_idea (about 30 s)
+> So the idea is simple. I don't train anything. I take DINOv2, a vision model that's already
+> learned what images look like, and use it to describe every cell and every field, one stain at a
+> time. Then I add some classic measurements a biologist can actually read, and I compare everything
+> against the untreated wells on the same plate.
+>
+> To guess a mechanism, it just looks up the most similar drugs in a reference library. New chip?
+> Swap the library. And all of this is real data, nothing simulated.
 
-### 1:25–2:40 Live demo (Tab 1, Analyze images)
-1. Pick the **taxol** example. Note that taxol is removed from the library ("blind test"). Click
-   Analyze.
-   > "A real field of taxol-treated cells, and taxol itself has been removed from the library.
-   > It finds every nucleus. Activity: stronger than 100% of untreated fields. Mechanism:
-   > microtubule stabiliser. The 90% conformal set, which is guaranteed to contain the truth 90%
-   > of the time on new compounds, has just this one answer. And the reason, in words: nuclear
-   > shape is fragmented, the signature of cells stuck in mitosis. The nearest references are
-   > docetaxel and epothilone, the same drug family."
-2. Pick **cytochalasin B**, then Analyze.
-   > "An actin poison. Correctly called an actin disruptor, matched to latrunculin and
-   > cytochalasin D."
-3. Pick **DMSO**, then Analyze.
-   > "Untreated cells. Activity is normal, so the system **refuses** to name a mechanism."
-4. Pick **colchicine**, then Analyze.
-   > "And here's why that matters. This colchicine field is borderline, so the system flags it as
-   > low confidence. Its guess is wrong, and it warns you. A model that knows when it doesn't
-   > know."
+### 04_taxol (about 25 s)
+> Let's try it. This is a real field of cells treated with taxol, and I've pulled taxol out of the
+> library, so it's never seen this drug.
+>
+> It finds the cells, and says the field looks more changed than any untreated one. Its call:
+> microtubule stabiliser, which is right. The 90% prediction set has just that one answer. It
+> explains that the nuclei are broken up, which is what happens when cells get stuck dividing, and
+> the closest matches are docetaxel and epothilone, the same family of drugs.
 
-### 2:40–3:30 Dose and toxicity (Tab 2, Compound explorer)
-- Show **cytochalasin D**:
-  > "For each of 112 compounds we fit dose-response curves for phenotype and for viability. The
-  > gap between them is the window we triage on. Cytochalasin D changes cells more than ten
-  > times below the dose that kills them."
-- Show **etoposide**:
-  > "Etoposide is active, but not cytotoxic in this range."
-- Show **vinblastine**:
-  > "Vinblastine was **never labelled** in this dataset. Shennong's Glass calls it a microtubule
-  > destabiliser at seven of its eight doses, starting at 3 nanomolar. Vinblastine is a vinca
-  > alkaloid, one of the drugs that damage nerves in chemotherapy patients by breaking
-  > microtubules. That's exactly the readout a neural organ-on-chip needs."
+### 05_cytoB (about 10 s)
+> Cytochalasin B, which wrecks the actin skeleton. Called an actin disruptor, and it lines up with
+> cytochalasin D and latrunculin. Good.
 
-### 3:30–3:55 Atlas (Tab 3)
-> "A map of all 906 compound-dose treatments. Mechanisms form clusters that the model was never
-> told about, and the 800 unlabelled doses are placed and labelled too."
+### 06_dmso (about 10 s)
+> Now plain untreated cells. Nothing's changed, so it doesn't make up a mechanism. It just says
+> there's nothing here.
 
-### 3:55–4:35 Validation (Tab 4, Benchmark)
-> "We validated on the standard BBBC021 benchmark: 5,775 real fields, each compound held out.
-> **85% of mechanisms are identified correctly** with no training on this data at all, and 77%
-> when entire imaging batches are held out as well. Across every design choice we tried, the
-> result stays between 84 and 88%. The 90% conformal sets reach 91% coverage, with just over one
-> mechanism per set. And when a mechanism is missing from the library, the system notices,
-> with an AUROC of 0.79."
+### 07_colchicine (about 15 s)
+> This one I like showing. It's a colchicine field that's pretty borderline. The guess is actually
+> wrong, but look: it's marked low confidence. It tells you not to trust it. That's the behaviour
+> I care about.
 
-### 4:35–5:00 Close (GitHub page)
-> "Everything is open source and reproducible on a free Kaggle account and a laptop. Next, we'd
-> rebuild the reference library on neural organ-on-chip images, where tubulin and actin read out
-> axonal damage. **Shennong's Glass**: see the remedy, and the poison, before they reach a
-> patient. Thank you."
+### 08_cytoD (about 20 s)
+> The second tab is about dose. For 112 compounds I fit two curves: when the cells start to look
+> different, and when they start dying. The gap between those is what matters. Cytochalasin D
+> changes the cells at doses more than ten times lower than the ones that kill them.
+
+### 09_etoposide (about 8 s)
+> Etoposide is clearly active, but it isn't killing cells in this range.
+
+### 10_vinblastine (about 25 s)
+> And this is my favourite. Vinblastine has no label anywhere in this dataset. The system calls it a
+> microtubule destabiliser at seven of its eight doses, starting from three nanomolar.
+>
+> That's correct. And vinblastine is one of the chemo drugs that damages patients' nerves, by
+> breaking exactly those microtubules. Which is the kind of thing you'd want a nerve-on-a-chip to
+> catch early.
+
+### 11_atlas (about 20 s)
+> This is every compound at every dose, about 900 treatments, laid out by how similar they look.
+> Nobody told the model what the mechanisms are, but they still group together. And the 800 or so
+> doses with no label get placed on the map too.
+
+### 12_benchmark (about 35 s)
+> To check it properly, I used the standard BBBC021 benchmark: about 5,800 real images, and every
+> drug is hidden while it's being tested.
+>
+> It gets the mechanism right 85% of the time, with no training on this data, and 77% when whole
+> imaging batches are held out as well. I tried a bunch of different settings and it stayed between
+> 84 and 88%. The 90% prediction sets actually cover the right answer 91% of the time, usually with
+> just one guess. And if a mechanism isn't in the library at all, it can tell, with an AUROC of 0.79.
+
+### 13_close (about 25 s)
+> It's all open source, and you can rerun the whole thing on a free Kaggle account and a laptop.
+> The next step is to build the reference library from actual nerve-on-a-chip images, where
+> tubulin and actin show you axon damage directly.
+>
+> That's Shennong's Glass. Thanks for watching.
 
 ---
-**Numbers to quote:** these come from `results/metrics.json`. Re-check them if the analysis is
-re-run.
+
+**On screen throughout:** *"Images: BBBC021v1, Caie et al. 2010, Broad Bioimage Benchmark
+Collection"*. No music, or royalty-free only.
