@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+# BBBC021 images are (c) AstraZeneca - never commit images or thumbnails
+/data/
+/features/
+/artifacts/
+app/examples/
+kaggle/**/out*/
+*.tif
+kaggle_out/
+report/*.aux
+report/*.log
+report/*.out
+report/main.pdf
+report/build.log

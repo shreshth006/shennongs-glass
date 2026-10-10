@@ -1,0 +1,18 @@
+# CPU is enough for the analysis and the demo app.
+# For CPU-only torch: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.3
+pandas==3.0.6
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+scikit-image==0.26.0
+tifffile==2026.9.20
+pillow==12.3.0
+matplotlib==3.11.2
+seaborn==0.13.2
+umap-learn==0.5.12
+plotly==7.1.0
+gradio==6.30.0
+torch==2.14.1
+torchvision==0.29.1
+kaggle==2.2.4
