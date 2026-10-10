@@ -32,7 +32,7 @@ Glass** is an end-to-end system that takes the three stains and returns:
 The image encoder is a frozen self-supervised foundation model (DINOv2), so **no training and no
 labels are needed**. Moving to a new chip only means swapping the reference library. On the
 BBBC021 benchmark (113 compounds × 8 doses) it reaches **85.4%** MoA accuracy on held-out
-compounds and **77.2%** when imaging batches are held out as well. Its 90% conformal sets reach
+compounds and **77.2%** when imaging batches are held out as well; a post-hoc, nested-validated change to how replicates are aggregated raises this to **93.2%** and **84.8%** with the same features. Its 90% conformal sets reach
 **91.3%** coverage, and mechanisms missing from the library are detected with
 **AUROC 0.79**. A four-tab Gradio app makes all of this usable without code.
 
@@ -94,7 +94,25 @@ or patient data is used.
 
 - **Finds neurotoxic mechanisms it was never shown:** vinblastine, a vinca alkaloid that causes chemotherapy-induced neuropathy, is absent from the annotated set. It is called a *microtubule destabiliser* at 7 of its 8 doses, starting at 3 nM.
 
-For context, the best published pipelines on BBBC021, which are trained or hand-engineered, report about 90–96% NSC. Our training-free, CPU-only configuration is below that. Its value is that it needs no labels, calibrates its uncertainty and is stable across design choices.
+For context, the best published pipelines on BBBC021, which are trained or hand-engineered, report about 90–96% NSC. The pre-registered configuration above is below that. Its value is that it needs no labels, calibrates its uncertainty and is stable across design choices.
+
+### Post-hoc improvement: 93% with the same features
+Found after the main run, so it is reported separately and the selection is nested
+(`scripts/exp_aggregation.py`). Two label-free changes to how treatment profiles are formed:
+averaging replicate wells with the **mean** instead of the median, and **centring** every
+treatment profile on the mean of all non-DMSO treatments before cosine similarity.
+
+| Setting | NSC | NSCB |
+|---|---|---|
+| Main run (median, no centring) | 85.4% | 77.2% |
+| Mean + centring, same weights and TVN | 94.2% | 87.0% |
+| Mean + centring, every TVN size (64/128/256) and classical weight (0.4/0.7/1.0) | 89.3%–94.2% | 80.4%–87.0% |
+| **Nested selection** (setting chosen without the held-out compound) | **93.2%** | **84.8%** |
+
+The nested figure is the honest estimate: it puts the training-free system inside the published
+90–96% range, still with no training and on a CPU-only, reduced feature set. The demo video, app and
+PDF report use the main-run configuration; the conformal and dose analyses have not yet been re-run
+with this setting.
 
 ![Phenotypic atlas of all 906 compound-dose treatments; annotated mechanisms form clusters the model was never told about](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_umap.png)
 
