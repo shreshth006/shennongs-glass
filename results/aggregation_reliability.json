@@ -1,0 +1,42 @@
+{
+ "main_run": {
+  "NSC": 0.8543689320388349,
+  "NSCB": 0.7717391304347826,
+  "conformal_0.05": {
+   "coverage": 0.9611650485436893,
+   "mean_set_size": 1.7281553398058251,
+   "singleton_rate": 0.6310679611650486
+  },
+  "conformal_0.1": {
+   "coverage": 0.912621359223301,
+   "mean_set_size": 1.1844660194174756,
+   "singleton_rate": 0.8349514563106796
+  },
+  "conformal_0.2": {
+   "coverage": 0.8543689320388349,
+   "mean_set_size": 1.0,
+   "singleton_rate": 1.0
+  },
+  "novelty_auroc": 0.7850410029220473
+ },
+ "mean_centred": {
+  "NSC": 0.941747572815534,
+  "NSCB": 0.8695652173913043,
+  "conformal_0.05": {
+   "coverage": 0.9514563106796117,
+   "mean_set_size": 1.4368932038834952,
+   "singleton_rate": 0.7087378640776699
+  },
+  "conformal_0.1": {
+   "coverage": 0.941747572815534,
+   "mean_set_size": 1.0,
+   "singleton_rate": 1.0
+  },
+  "conformal_0.2": {
+   "coverage": 0.941747572815534,
+   "mean_set_size": 1.0,
+   "singleton_rate": 1.0
+  },
+  "novelty_auroc": 0.826892261287586
+ }
+}

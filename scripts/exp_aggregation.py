@@ -84,3 +84,19 @@ json.dump({k: {"accuracy": v[0], "chosen": v[1]} for k, v in nest.items()},
           open(os.path.join(args.out, "aggregation_nested.json"), "w"), indent=1)
 print(df.pivot_table(index=["aggregation", "centred"], columns="tvn_components", values=["NSC", "NSCB"], aggfunc=["min", "max"]).round(3))
 print("nested (TVN 128):", {k: round(v[0], 4) for k, v in nest.items()})
+
+# ---- reliability with the improved setting (TVN 128, classical weight 0.7: the main-run choices)
+from shennong import moa  # noqa: E402
+
+tm_all, cfg = configs(128)
+rel = {}
+for label, key in [("main_run", (0.7, "median", False)), ("mean_centred", (0.7, "mean", True))]:
+    tma, pa = annotated(tm_all, cfg[key])
+    r = {"NSC": evaluate(tma, pa)["accuracy"], "NSCB": evaluate(tma, pa, batch_aware=True)["accuracy"]}
+    for a in (0.05, 0.1, 0.2):
+        c = moa.conformal(tma, pa, alpha=a)
+        r[f"conformal_{a}"] = {k: c[k] for k in ("coverage", "mean_set_size", "singleton_rate")}
+    r["novelty_auroc"] = moa.novelty_auroc(tma, pa)[0]
+    rel[label] = r
+json.dump(rel, open(os.path.join(args.out, "aggregation_reliability.json"), "w"), indent=1)
+print(json.dumps(rel, indent=1))
