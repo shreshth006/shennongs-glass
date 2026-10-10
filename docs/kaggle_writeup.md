@@ -1,17 +1,17 @@
 # Shennong's Glass: training-free foundation-model phenotypic screening with calibrated uncertainty for organ-on-chip drug evaluation
 
-**Submission category: End-to-End System**
+## Category Declaration
+**End-to-End System**
 
-**Demo video:** https://youtu.be/W5NdRDSqj0U
-**Code repository:** https://github.com/shreshth006/shennongs-glass
-**Technical report (PDF):** https://github.com/shreshth006/shennongs-glass/blob/main/report/shennongs_glass_report.pdf
-**Team:** Shreshth Mishra (solo; AI / computer science; Vellore Institute of Technology)
+## Demo Video
+https://youtu.be/W5NdRDSqj0U
+
+## Code Repository Link
+https://github.com/shreshth006/shennongs-glass (MIT licence; Kaggle feature-extraction notebooks are public and linked from the README)
 
 > **Real data, no simulation.** Every number below is computed on 5,775 real microscopy fields (BBBC021, 113 compounds × 8 doses) with held-out-compound protocols. It is fully reproducible from the public repo.
 
----
-
-## Project summary
+## Project Summary
 
 *Shennong, the Divine Farmer of Chinese legend, tasted hundreds of herbs to tell medicine from
 poison. His body was transparent, so he could watch each herb act on his organs. An organ-on-chip
@@ -36,10 +36,13 @@ compounds and **77.2%** when imaging batches are held out as well. Its 90% confo
 **91.3%** coverage, and mechanisms missing from the library are detected with
 **AUROC 0.79**. A four-tab Gradio app makes all of this usable without code.
 
-## Technical report
+## Technical Report
 
-The full report (method, experiments, reliability analysis, limitations, reproduction) is linked
-above as a PDF. Key points:
+Full report (PDF, 9 pages): https://github.com/shreshth006/shennongs-glass/blob/main/report/shennongs_glass_report.pdf
+
+**Team:** Shreshth Mishra (solo; AI / computer science; Vellore Institute of Technology)
+
+Key points:
 
 ### Problem
 Three gaps:
@@ -106,9 +109,12 @@ bash scripts/fetch_data.sh && python scripts/run_analysis.py && python app/app.p
 - **Neural organ-on-chip:** tubulin and actin are exactly the readouts of axonal toxicity, so the
   system is a candidate early-warning tool for neurotoxic liabilities.
 
-## Sources and licences
+### Sources and licences
 - BBBC021v1: Caie et al., *Mol. Cancer Ther.* 2010; Ljosa et al., *Nat. Methods* 2012
   (© AstraZeneca, research use).
 - DINOv2: Oquab et al. 2023 (Apache-2.0).
 - PyTorch, scikit-image, scikit-learn, UMAP, Gradio (open-source licences).
 - Code: MIT licence.
+
+## Optional Demo Link
+No hosted demo. The four-tab Gradio app runs locally with `python app/app.py` (setup in the repo README) and is shown end to end in the demo video.
