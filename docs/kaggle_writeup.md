@@ -104,6 +104,26 @@ pip install -r requirements.txt && kaggle auth login
 bash scripts/fetch_data.sh && python scripts/run_analysis.py && python app/app.py
 ```
 
+### From BBBC021 to organ-on-chip
+Not yet done; this is the concrete adoption path, and nothing in it needs training.
+1. **Readout.** Nuclei, β-tubulin (βIII-tubulin for neurons) and F-actin are already the standard
+   endpoint stains of chip assays, so the inputs do not change.
+2. **Reference library.** Image a panel of compounds with known mechanisms (for example 20–40 drugs,
+   4–6 doses, three or more chips each) with vehicle channels on every chip. Profiles are embedded
+   with the frozen encoder and normalised to each chip's own vehicle controls. That is one imaging
+   run plus about an hour of CPU, and the library becomes the "model".
+3. **3D tissue.** The field-level view needs no segmentation (79.6% NSC on its own here), so it can
+   embed maximum-intensity projections or pool per-slice embeddings. Classical features would need 3D
+   segmentation.
+4. **Calibration.** Conformal sets and the novelty threshold are recalibrated leave-one-compound-out
+   on the chip library, so the coverage guarantee carries over for compounds exchangeable with it.
+5. **First target: nerve-on-a-chip.** Microtubules and actin are the readouts of axonal damage. A
+   panel of known neuropathy drugs (vinca alkaloids, taxanes, bortezomib, platinum compounds) and safe
+   controls would test whether Shennong's Glass flags neurotoxicity early. The vinblastine result
+   above is the first hint that it can.
+6. **Validation.** The same protocols apply: held-out-compound accuracy, held-out-chip accuracy (the
+   analogue of NSCB), conformal coverage and novelty AUROC.
+
 ### Limitations
 - Validated on 2D MCF-7 cells, not yet on organ-on-chip images. The method only assumes the three
   stains, but 3D chips need validation.
