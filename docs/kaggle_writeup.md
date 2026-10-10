@@ -79,14 +79,24 @@ or patient data is used.
 | DINOv2 single cells + TVN | 85.4% | 80.4% |
 | **Fusion (Shennong's Glass)** | **85.4%** | **77.2%** |
 
+![MoA accuracy on held-out compounds (NSC) and held-out compounds and batches (NSCB)](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_benchmark.png)
+
 - **Conformal sets:** 91.3% coverage at the 90% target, 1.18 MoAs on average.
 - **Novel-MoA detection:** AUROC 0.79.
+
+![Left: conformal coverage tracks the target. Right: treatments whose mechanism was hidden from the library sit far from it](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_reliability.png)
+
 - **Robustness:** fused profile within 84.5%–88.3% NSC across every whitening/fusion setting tried (single views vary 78.6%–90.3%).
 - **Replicate consistency:** 88.3% of annotated treatments.
 - **Dose-response:** 112 compounds triaged by their phenotype-to-cytotoxicity window.
+
+![Lowest phenotypically active dose against lowest cytotoxic dose, and the triage of all 112 compounds](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_window.png)
+
 - **Finds neurotoxic mechanisms it was never shown:** vinblastine, a vinca alkaloid that causes chemotherapy-induced neuropathy, is absent from the annotated set. It is called a *microtubule destabiliser* at 7 of its 8 doses, starting at 3 nM.
 
 For context, the best published pipelines on BBBC021, which are trained or hand-engineered, report about 90–96% NSC. Our training-free, CPU-only configuration is below that. Its value is that it needs no labels, calibrates its uncertainty and is stable across design choices.
+
+![Phenotypic atlas of all 906 compound-dose treatments; annotated mechanisms form clusters the model was never told about](https://raw.githubusercontent.com/shreshth006/shennongs-glass/main/results/fig_umap.png)
 
 ### Reproduction
 ```bash
