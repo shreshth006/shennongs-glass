@@ -14,3 +14,4 @@ report/*.log
 report/*.out
 report/main.pdf
 report/build.log
+/voice/
