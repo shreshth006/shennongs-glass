@@ -8,6 +8,8 @@
 
 **Category: End-to-End System** · AI4S Open Innovation: AI for Life Science (5th Pazhou Algorithm Competition)
 
+**Demo video (4:46):** https://youtu.be/W5NdRDSqj0U · **Report:** [report/shennongs_glass_report.pdf](report/shennongs_glass_report.pdf)
+
 Shennong's Glass turns three-channel fluorescence images (nuclei / β-tubulin / F-actin — the standard
 endpoint stains of organ-on-chip and microphysiological assays) into decision-ready readouts for
 drug screening:

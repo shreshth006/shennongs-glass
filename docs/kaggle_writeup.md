@@ -2,7 +2,7 @@
 
 **Submission category: End-to-End System**
 
-**Demo video:** VIDEO_LINK
+**Demo video:** https://youtu.be/W5NdRDSqj0U
 **Code repository:** https://github.com/shreshth006/shennongs-glass
 **Technical report (PDF):** https://github.com/shreshth006/shennongs-glass/blob/main/report/shennongs_glass_report.pdf
 **Team:** Shreshth Mishra (solo; AI / computer science; Vellore Institute of Technology)
