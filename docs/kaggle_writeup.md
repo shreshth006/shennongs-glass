@@ -59,7 +59,7 @@ or patient data is used.
 
 ### Method
 - **Three views of each field:**
-  - interpretable morphology from classical segmentation (23 features);
+  - interpretable morphology from classical segmentation (33 features);
   - frozen DINOv2 embeddings of single-cell crops, per channel;
   - DINOv2 embeddings of the whole field, per channel.
 - **Normalisation:** per-plate DMSO centring, then typical-variation normalisation (PCA whitening
