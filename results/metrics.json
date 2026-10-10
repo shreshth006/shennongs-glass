@@ -1,0 +1,91 @@
+{
+  "n_images": 5775,
+  "n_wells": 3300,
+  "n_morph": 33,
+  "benchmark": {
+    "classical": {
+      "NSC": 0.7087378640776699,
+      "NSC_balanced": 0.7090277777777777,
+      "NSCB": 0.5978260869565217,
+      "NSCB_balanced": 0.5717857142857143,
+      "n_NSC": 103,
+      "n_NSCB": 92
+    },
+    "dino_cell": {
+      "NSC": 0.8543689320388349,
+      "NSC_balanced": 0.8527116402116403,
+      "NSCB": 0.8043478260869565,
+      "NSCB_balanced": 0.7801984126984126,
+      "n_NSC": 103,
+      "n_NSCB": 92
+    },
+    "dino_field": {
+      "NSC": 0.7961165048543689,
+      "NSC_balanced": 0.7984788359788358,
+      "NSCB": 0.717391304347826,
+      "NSCB_balanced": 0.6925,
+      "n_NSC": 103,
+      "n_NSCB": 92
+    },
+    "fusion": {
+      "NSC": 0.8543689320388349,
+      "NSC_balanced": 0.8459325396825396,
+      "NSCB": 0.7717391304347826,
+      "NSCB_balanced": 0.7551984126984127,
+      "n_NSC": 103,
+      "n_NSCB": 92
+    },
+    "dino_cell_no_tvn": {
+      "NSC": 0.7961165048543689,
+      "NSC_balanced": 0.8029100529100529,
+      "NSCB": 0.6739130434782609,
+      "NSCB_balanced": 0.6421031746031747,
+      "n_NSC": 103,
+      "n_NSCB": 92
+    }
+  },
+  "sensitivity": {
+    "NSC_min": 0.7864077669902912,
+    "NSC_max": 0.9029126213592233,
+    "NSC_median": 0.8543689320388349,
+    "NSCB_min": 0.7065217391304348,
+    "NSCB_max": 0.8369565217391305,
+    "NSCB_median": 0.7934782608695652,
+    "fusion_NSC_min": 0.8446601941747572,
+    "fusion_NSC_max": 0.883495145631068
+  },
+  "conformal": {
+    "0.05": {
+      "coverage": 0.9611650485436893,
+      "mean_set_size": 1.7281553398058251,
+      "singleton_rate": 0.6310679611650486
+    },
+    "0.1": {
+      "coverage": 0.912621359223301,
+      "mean_set_size": 1.1844660194174756,
+      "singleton_rate": 0.8349514563106796
+    },
+    "0.2": {
+      "coverage": 0.8543689320388349,
+      "mean_set_size": 1.0,
+      "singleton_rate": 1.0
+    }
+  },
+  "novelty_auroc": 0.7850410029220473,
+  "percent_replicating": 0.3734806629834254,
+  "percent_replicating_annotated": 0.883495145631068,
+  "dose": {
+    "n_compounds": 112,
+    "activity_threshold": 15.513828528712375,
+    "triage_counts": {
+      "phenotype only at cytotoxic doses": 35,
+      "inactive in tested range": 24,
+      "narrow window (<10x)": 21,
+      "cytotoxic without a distinct phenotype": 14,
+      "active, not cytotoxic in tested range": 11,
+      "active >=10x below cytotoxic dose": 7
+    }
+  },
+  "single_field_activity_threshold": 23.0359611786565,
+  "novelty_threshold": 0.4559356216382064
+}
