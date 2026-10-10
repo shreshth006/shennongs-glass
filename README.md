@@ -63,6 +63,12 @@ To regenerate the features from raw images, run `kaggle/features/features.py` as
 notebook (GPU T4, dataset `stanleyhua/bbbc021` attached; ~1 h). It writes `meta.parquet`,
 `morph.parquet`, `emb_cell.npy`, `emb_img.npy` and `thumbs.tar`.
 
+The reported run used the CPU configuration, split over public Kaggle notebooks
+[`ai4s-feat-cpu-0`](https://www.kaggle.com/code/aerochrome/ai4s-feat-cpu-0) …
+[`ai4s-feat-cpu-5`](https://www.kaggle.com/code/aerochrome/ai4s-feat-cpu-5) and
+[`ai4s-feat-cpu-7`](https://www.kaggle.com/code/aerochrome/ai4s-feat-cpu-7) (shard 6 did not finish
+and is excluded); `scripts/fetch_data.sh` downloads their outputs.
+
 ## Repository layout
 
 | Path | What |
