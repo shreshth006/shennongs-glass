@@ -1,0 +1,17 @@
+{
+ "NSC": {
+  "accuracy": 0.9320388349514563,
+  "chosen": {
+   "(0.7, 'mean', True)": 32,
+   "(0.4, 'mean', True)": 6
+  }
+ },
+ "NSCB": {
+  "accuracy": 0.8478260869565217,
+  "chosen": {
+   "(0.4, 'mean', True)": 27,
+   "(0.7, 'mean', False)": 3,
+   "(0.4, 'mean', False)": 3
+  }
+ }
+}
